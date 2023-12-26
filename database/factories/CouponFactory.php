@@ -17,11 +17,11 @@ class CouponFactory extends Factory
     public function definition(): array
     {
         return [
-            'code' => fake()->unique()->word(),
-            'value' => 10,
+            'code' => fake()->regexify('[A-Z0-9]{10}'),
+            'value' => fake()->numberBetween(5, 50),
             'active' => 1,
-            'min_price' => 0,
-            'max_price' => 1000
+            'min_price' => fake()->numberBetween(0, 50),
+            'max_price' => fake()->numberBetween(500, 1000)
         ];
     }
 }
