@@ -19,4 +19,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function nation()
+    {
+        return $this->belongsTo(Nation::class);
+    }
 }
