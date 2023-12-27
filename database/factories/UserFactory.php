@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Nation;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -28,7 +29,7 @@ class UserFactory extends Factory
             'surname' => fake()->word(),
             'email' => fake()->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password'),
-            'nation_id' => 1,
+            'nation_id' => Nation::factory(),
             'newsletter' => 0,
             'invoice' => 0,
             'vat_number' => '',
