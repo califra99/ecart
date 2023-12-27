@@ -1,0 +1,51 @@
+{
+    "extends": [
+        "eslint:recommended",
+        "plugin:vue/vue3-recommended"
+    ],
+    "rules": {
+        "no-unused-vars": 0,
+        "vue/max-attributes-per-line": [
+            "error",
+            {
+                "singleline": {
+                    "max": 3
+                },
+                "multiline": {
+                    "max": 1
+                }
+            }
+        ],
+        "vue/html-indent": [
+            "error",
+            "tab",
+            {
+                "attribute": 1,
+                "baseIndent": 1,
+                "closeBracket": 0,
+                "alignAttributesVertically": true,
+                "ignores": []
+            }
+        ],
+        "vue/html-self-closing": [
+            "error",
+            {
+                "html": {
+                    "void": "always",
+                    "normal": "any",
+                    "component": "always"
+                },
+                "svg": "always",
+                "math": "always"
+            }
+        ],
+        "vue/require-default-prop": 0,
+        "vue/multi-word-component-names": "off"
+    },
+    "globals": {
+        "defineProps": "readonly",
+        "defineEmits": "readonly",
+        "defineExpose": "readonly",
+        "withDefaults": "readonly"
+    }
+}
