@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartItemsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -33,6 +34,8 @@ Route::middleware('auth')->group(function () {
     })->middleware('verified')->name('dashboard');
 
     Route::get('products', [ProductsController::class, 'index'])->name('products.index');
+
+    Route::post('carts/{product}/add', [CartItemsController::class, 'store'])->name('cartitem.store');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
