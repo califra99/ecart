@@ -17,7 +17,7 @@ provide('message', message);
 
 <template>
 	<div>
-		<div class="min-h-screen bg-gray-100">
+		<div class="min-h-screen bg-white">
 			<nav class="bg-white border-b border-gray-100">
 				<!-- Primary Navigation Menu -->
 				<div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -43,7 +43,7 @@ provide('message', message);
 								</NavLink>
 
 								<NavLink :href="route('cart.show')" :active="route().current('cart.show')">
-									Yuor Cart
+									Your Cart
 								</NavLink>
 							</div>
 						</div>

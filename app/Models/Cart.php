@@ -16,4 +16,15 @@ class Cart extends Model
             ->withTimestamps()
             ->using(CartItem::class);
     }
+
+    public function total()
+    {
+        $total = 0;
+
+        foreach ($this->items as $item) {
+            $total += $item->price * $item->pivot->quantity;
+        }
+
+        return $total;
+    }
 }

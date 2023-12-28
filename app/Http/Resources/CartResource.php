@@ -16,7 +16,8 @@ class CartResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'items' => ProductResource::collection($this->whenLoaded('items'))
+            'items' => ProductResource::collection($this->whenLoaded('items')),
+            'total' => $this->relationLoaded('items') ? $this->total() : 0
         ];
     }
 }

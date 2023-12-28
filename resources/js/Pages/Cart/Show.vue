@@ -43,6 +43,9 @@ defineProps({
 								</div>
 							</li>
 						</ul>
+						<div v-if="cart.data.items.length == 0" class="py-6">
+							No products in the cart
+						</div>
 					</section>
 
 					<!-- Order summary -->
@@ -57,12 +60,12 @@ defineProps({
 									Total
 								</dt>
 								<dd class="text-base font-medium text-gray-900">
-									$112.32
+									€ {{ cart.data.total }}
 								</dd>
 							</div>
 						</div>
 
-						<div class="mt-6">
+						<div v-if="cart.data.total" class="mt-6">
 							<button type="submit" class="w-full px-4 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">
 								Checkout
 							</button>
