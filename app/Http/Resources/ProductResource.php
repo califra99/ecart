@@ -20,14 +20,18 @@ class ProductResource extends JsonResource
             'description' => $this->description,
             'price' => $this->price,
             'stock_qty' => $this->stock_qty,
-            'pivot' => [
-                'qty' => $this->whenPivotLoaded('cart_items', function () {
-                    return $this->pivot->quantity;
-                }),
-            ],
+            'pivot' => $this->whenPivotLoaded('cart_items', function () {
+                return [
+                    'qty' => $this->pivot->quantity,
+                    'grossCost' => $this->pivot->grossCost(),
+                    'cost' => $this->pivot->cost(),
+                    'couponApplied' => !!$this->pivot->coupon_id
+                ];
+            }),
             'paths' => [
                 'addToCart' => '/carts/' . $this->id . '/add',
-                'deleteFromCart' => '/carts/' . $this->id . '/remove'
+                'deleteFromCart' => '/carts/' . $this->id . '/remove',
+                'applyCoupon' => '/coupons/apply/' . $this->id
             ]
         ];
     }

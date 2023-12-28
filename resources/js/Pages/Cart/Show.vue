@@ -1,6 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import QuantityManager from '@/Components/Products/QuantityManager.vue';
+import CouponApplyForm from '@/Components/Products/CouponApplyForm.vue';
 import { Head } from '@inertiajs/vue3';
 
 defineProps({
@@ -35,9 +36,15 @@ defineProps({
 										</h3>
 
 										<QuantityManager :product="product" class="py-4" />
-											
+
+										<CouponApplyForm v-if="!product.pivot.couponApplied" :product="product" class="pb-4" />
+										<div v-else class="pb-4">
+											Cuopon applied
+										</div>
+							
 										<p class="mt-1 text-sm font-bold text-gray-900">
-											€ {{ Math.round((product.price * product.pivot.qty + Number.EPSILON) * 100) / 100 }}
+											<del v-if="product.pivot.couponApplied" class="mr-2">€ {{ product.pivot.grossCost }}</del>
+											<span>€ {{ product.pivot.cost }}</span>
 										</p>
 									</div>
 								</div>
