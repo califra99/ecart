@@ -15,7 +15,7 @@ export function useFlashMessage() {
     watch(message, () => {
         if (message.value) {
             setTimeout(() => {
-                usePage().props.value.flash.message = ''
+                usePage().props.flash.message = ''
             }, 5000)
         }
     })

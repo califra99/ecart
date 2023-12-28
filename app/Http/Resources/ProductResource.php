@@ -19,8 +19,15 @@ class ProductResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'price' => $this->price,
+            'stock_qty' => $this->stock_qty,
+            'pivot' => [
+                'qty' => $this->whenPivotLoaded('cart_items', function () {
+                    return $this->pivot->quantity;
+                }),
+            ],
             'paths' => [
-                'addToCart' => '/carts/' . $this->id . '/add'
+                'addToCart' => '/carts/' . $this->id . '/add',
+                'deleteFromCart' => '/carts/' . $this->id . '/remove'
             ]
         ];
     }

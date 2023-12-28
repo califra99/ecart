@@ -22,4 +22,20 @@ class CartItemsController extends Controller
 
         return back()->with('message', 'Prodotto aggiunto al carrello');
     }
+
+    public function destroy(Product $product)
+    {
+        $cart = auth()->user()->cart()->firstOrFail();
+
+        // Check if the relationship exists
+        if ($cart->items->contains($product)) {
+            // If it exists, decrease the quantity
+            $cart->items()->updateExistingPivot($product, ['quantity' => DB::raw('quantity - 1')]);
+
+            // Remove from the cart if quantity is 0
+            $cart->items()->wherePivot('quantity', 0)->detach();
+        }
+
+        return back()->with('message', 'Prodotto rimosso dal carrello');
+    }
 }

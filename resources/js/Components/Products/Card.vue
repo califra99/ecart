@@ -1,13 +1,11 @@
 <script setup>
-import { router } from '@inertiajs/vue3'
+import { useCart } from "@/Composables/useCart.js";
 
 const props = defineProps({
-    product: Object
+	product: Object
 })
 
-const add = () => {
-	router.post(props.product.paths.addToCart, {}, { preserveScroll: true });	
-}
+const { add } = useCart();
 </script>
 
 <template>
@@ -32,9 +30,18 @@ const add = () => {
 			</div>
 		</div>
 		<div class="mt-6">
-			<button type="button" class="relative flex items-center justify-center w-full px-8 py-2 text-sm font-medium text-gray-900 bg-indigo-100 border border-transparent rounded-md hover:bg-indigo-200" @click="add">
+			<button
+				v-if="product.stock_qty"
+				type="button"
+				class="relative flex items-center justify-center w-full px-8 py-2 text-sm font-medium text-gray-900 bg-indigo-100 border border-transparent rounded-md hover:bg-indigo-200"
+				@click="add(product)"
+			>
 				Add
 			</button>
+			
+			<div v-else class="text-sm text-gray-400">
+				Product currently unavailable
+			</div>
 		</div>
 	</div>
 </template>
