@@ -52,7 +52,7 @@ defineProps({
 								</div>
 							</li>
 						</ul>
-						<div v-if="!cart.data.items" class="py-6">
+						<div v-if="!cart.data.total" class="py-6">
 							No products in the cart
 						</div>
 					</section>

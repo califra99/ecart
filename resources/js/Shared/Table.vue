@@ -30,7 +30,7 @@ let props = defineProps({
 						</tr>
 					</thead>
 					<tbody class="bg-gray-100 divide-y divide-gray-200 ">
-						<tr v-if="!rows">
+						<tr v-if="rows.length == 0">
 							<td :colspan="(headers.length + actions.length)">
 								<div class="py-5 text-center">
 									<h3 class="mt-2 text-sm font-medium text-gray-900">

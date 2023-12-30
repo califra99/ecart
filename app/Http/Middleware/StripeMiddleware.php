@@ -15,7 +15,8 @@ class StripeMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (url()->previous() != 'https://checkout.stripe.com/') abort(403);
+        // questo funziona solo se anche l'ambiente di sviluppo è in https quindi lo tengo commentato
+        // if (url()->previous() != 'https://checkout.stripe.com/') abort(403);
 
         return $next($request);
     }
