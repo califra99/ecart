@@ -51,7 +51,6 @@ let props = defineProps({
 								<td class="relative py-4 pl-3 pr-4 text-sm font-medium text-right whitespace-nowrap sm:pr-6">
 									<div class="flex items-center justify-end gap-x-2">
 										<a
-											target="_blank"
 											title="Generate Invoice"
 											class="text-indigo-500 hover:text-indigo-400"
 											:href="row.paths.generateInvoice"

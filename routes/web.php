@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::post('coupons/apply/{product}', [CouponsController::class, 'apply'])->name('coupons.apply');
 
     Route::get('your-orders', [OrdersController::class, 'index'])->name('orders.index');
+    Route::get('orders/{order}/generate-invoice', [OrdersController::class, 'generateInvoice']);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -18,7 +18,7 @@ class OrderResource extends JsonResource
             'id' => $this->id,
             'title' => 'Order '. $this->id,
             'paths' => [
-                'generateInvoice' => '/order/'. $this->id . '/generate-invoice',
+                'generateInvoice' => '/orders/'. $this->id . '/generate-invoice',
             ]
         ];
     }
