@@ -2,6 +2,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import QuantityManager from '@/Components/Products/QuantityManager.vue';
 import CouponApplyForm from '@/Components/Products/CouponApplyForm.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { Head } from '@inertiajs/vue3';
 
 defineProps({
@@ -21,7 +22,8 @@ defineProps({
 
 		<div class="bg-white">
 			<div class="max-w-2xl px-4 pt-4 mx-auto sm:px-6 lg:max-w-7xl lg:px-8">
-				<form class="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
+				<form class="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16" method="post" action="/checkout">
+					<input type="hidden" name="_token" :value="$page.props.csrf_token" />
 					<section class="lg:col-span-7">
 						<ul class="border-t border-b border-gray-200 divide-y divide-gray-200">
 							<li v-for="product in cart.data.items" :key="product.id" class="flex py-6 sm:py-10">
@@ -50,7 +52,7 @@ defineProps({
 								</div>
 							</li>
 						</ul>
-						<div v-if="cart.data.items.length == 0" class="py-6">
+						<div v-if="!cart.data.items" class="py-6">
 							No products in the cart
 						</div>
 					</section>
@@ -73,9 +75,9 @@ defineProps({
 						</div>
 
 						<div v-if="cart.data.total" class="mt-6">
-							<button type="submit" class="w-full px-4 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">
+							<PrimaryButton class="justify-center w-full">
 								Checkout
-							</button>
+							</PrimaryButton>
 						</div>
 					</section>
 				</form>

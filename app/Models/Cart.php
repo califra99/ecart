@@ -21,4 +21,17 @@ class Cart extends Model
     {
         return $this->items->sum(fn ($item) => $item->pivot->cost());
     }
+
+    public function toOrder()
+    {
+        $order = $this->replicate(['id'])->setTable('orders');
+
+        $order->save();
+
+        foreach ($this->items as $item) {
+            $item->pivot->toOrderItem($order->id);
+        }
+
+        $this->delete();
+    }
 }

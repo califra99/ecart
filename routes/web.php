@@ -38,6 +38,9 @@ Route::middleware('auth')->group(function () {
     Route::get('products', [ProductsController::class, 'index'])->name('products.index');
 
     Route::get('your-cart', [CartsController::class, 'show'])->name('cart.show');
+    Route::post('checkout', [CartsController::class, 'checkout'])->name('cart.checkout');
+    Route::get('success', [CartsController::class, 'success'])->name('checkout.success')->middleware('stripe');
+
     Route::post('carts/{product}/add', [CartItemsController::class, 'store'])->name('cartitem.store');
     Route::delete('carts/{product}/remove', [CartItemsController::class, 'destroy'])->name('cartitem.destroy');
 

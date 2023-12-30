@@ -2,37 +2,24 @@
 
 namespace App\Models;
 
+use App\HasItems;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class CartItem extends Pivot
 {
-    use HasFactory;
+    use HasFactory, HasItems;
 
     protected $table = 'cart_items';
 
-    public function product()
+    public function toOrderItem($orderId)
     {
-        return $this->belongsTo(Product::class);
-    }
+        $this->order_id = $orderId;
 
-    public function coupon()
-    {
-        return $this->belongsTo(Coupon::class);
-    }
+        $this->replicate(['id', 'cart_id'])
+            ->setTable('order_items')
+            ->save();
 
-    public function grossCost()
-    {
-        return $this->product->price * $this->quantity;
-    }
-
-    public function netCost()
-    {
-        return $this->grossCost() - ($this->product->price * $this->quantity * $this->coupon->value) / 100;
-    }
-
-    public function cost()
-    {
-        return round($this->coupon ? $this->netCost() : $this->grossCost(), 2);
+        $this->delete();
     }
 }
