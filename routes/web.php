@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartItemsController;
 use App\Http\Controllers\CartsController;
 use App\Http\Controllers\CouponsController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -45,6 +46,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('carts/{product}/remove', [CartItemsController::class, 'destroy'])->name('cartitem.destroy');
 
     Route::post('coupons/apply/{product}', [CouponsController::class, 'apply'])->name('coupons.apply');
+
+    Route::get('your-orders', [OrdersController::class, 'index'])->name('orders.index');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -45,6 +45,10 @@ provide('message', message);
 								<NavLink :href="route('cart.show')" :active="route().current('cart.show')">
 									Your Cart
 								</NavLink>
+
+								<NavLink :href="route('orders.index')" :active="route().current('orders.index')">
+									Your Orders
+								</NavLink>
 							</div>
 						</div>
 
@@ -142,6 +146,10 @@ provide('message', message);
 
 						<ResponsiveNavLink :href="route('cart.show')" :active="route().current('cart.show')">
 							Your Cart
+						</ResponsiveNavLink>
+
+						<ResponsiveNavLink :href="route('orders.index')" :active="route().current('orders.index')">
+							Your Orders
 						</ResponsiveNavLink>
 					</div>
 
