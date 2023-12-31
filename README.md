@@ -1,66 +1,73 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# E-cart
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Introduzione
+Questo progetto è un'applicazione di e-commerce sviluppata utilizzando il framework Laravel, il framework CSS Tailwind, il framework JavaScript Vue.js e Inertia.js. La combinazione di queste tecnologie è stata scelta per garantire un'esperienza utente fluida, un backend robusto e una gestione efficiente dello stato dell'applicazione.
 
-## About Laravel
+## Criticità della struttura fornita
+Ci sono alcune criticità potenziali nella struttura fornita. Di seguito sono elencati alcuni punti che potrebbero causare problemi o possono essere migliorati:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+1. **Nomi delle tabelle in PascalCase invece di snake_case:**
+   La convenzione comune è utilizzare nomi di tabelle in snake_case. L'attuale utilizzo di PascalCase potrebbe causare confusione con le pratiche di denominazione comuni nei framework come Laravel.
+     
+2. **Uso di TEXT per il nome del prodotto:**
+   Utilizzare il tipo di dato `TEXT` per il campo `Name` del prodotto potrebbe essere eccessivo. Ho preferito usare `VARCHAR` con una lunghezza massima appropriata.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+3. **Campo `AssociatedProductIds` come TEXT:**
+  Il campo `AssociatedProductIds` nella tabella dei coupon è dichiarato come `TEXT`. Ho preferito normalizzare i dati utilizzando una tabella di collegamento (coupons_products).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+4. **Campo `Active` come bit(1):**
+   L'uso di `bit(1)` per rappresentare un campo booleano (`Active`) può portare a complessità nella gestione dei dati. Ho trovato più chiaro utilizzare `TINYINT(1)`.
 
-## Learning Laravel
+5. **Assenza di indici sugli attributi di ricerca:**
+  L'assenza di indici potrebbe influire sulle prestazioni delle query. In questo esempio, non effettuando quasi mai delle query di ricerca non ho inserito molti indici, però sarebbe vantaggioso aggiungerne sui campi coinvolti nelle query.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Scelte delle tecnologie
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Laravel
+Ho scelto Laravel come framework backend per la sua sintassi espressiva, la facilità di sviluppo, il supporto integrato per l'ORM Eloquent e la gestione semplificata delle route. La sua comunità attiva e le numerose librerie disponibili lo rendono una scelta solida per sviluppare applicazioni web complesse. Non essendo stata richiesta tutta la parte della gestione dell'utente e delle sessioni, ho usato lo starter kit Laravel Breeze. Il suo utilizzo offre un punto di partenza solido per la gestione delle sessioni e dell'autenticazione, accelerando lo sviluppo di funzionalità legate agli utenti.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Tailwind CSS
+Ho utilizzato Tailwind per la sua metodologia "utility-first" che facilita la creazione di interfacce utente personalizzate con facilità. Inoltre, la sua configurazione facile e flessibile si adatta bene al processo di sviluppo.
 
-## Laravel Sponsors
+### Vue.js e Inertia.js
+Ho utilizzato Vue.js per la gestione dinamica delle interfacce utente e per creare componenti riutilizzabili. Ho integrato Inertia.js per semplificare il passaggio dei dati tra il frontend e il backend, migliorando l'esperienza di sviluppo e la performance dell'applicazione.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Deploy della soluzione
 
-### Premium Partners
+### Infrastruttura/Hosting
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Per il deploy della soluzione, consiglio l'utilizzo di una piattaforma cloud come Microsoft Azure o AWS. Le seguenti sono opzioni consigliate per l'infrastruttura:
 
-## Contributing
+- **Sito**: Utilizzare Azure App Service o AWS S3 per il deployment.
+- **Database**: Utilizzare un servizio gestito come Azure Database for MySQL o Amazon RDS per la gestione del database MySQL.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Pipeline CI/CD
 
-## Code of Conduct
+### CI (Continuous Integration)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Per la CI, consiglio l'utilizzo di servizi come GitHub Actions. La pipeline di CI dovrebbe includere le seguenti fasi:
 
-## Security Vulnerabilities
+1. **Build**: Compilazione del frontend e del backend.
+2. **Test Unitari e di Integrazione**: Esecuzione di test automatici per garantire la stabilità del sistema.
+3. **Analisi Statica del Codice**: Utilizzo di strumenti come PHPStan per il backend e ESLint per il frontend.
+4. **Controllo della Qualità del Codice**: Verifica della conformità alle linee guida del codice.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### CD (Continuous Deployment)
 
-## License
+Per la CD, consiglio l'utilizzo di uno strumento come Laravel Envoyer o Azure DevOps. La pipeline di CD dovrebbe comprendere i seguenti passaggi:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1. **Deployment su Ambiente di Test**: Distribuzione automatica su un ambiente di test per ulteriori verifiche.
+2. **Deployment su Ambiente di Produzione**: Se i test sono superati con successo, distribuzione automatica sull'ambiente di produzione.
+
+## Configurazione Locale
+
+1. Clonare il repository.
+2. Installare le dipendenze del frontend: `npm install`.
+3. Installare le dipendenze del backend: `composer install`.
+4. Creare un file di ambiente: `.env` e configurare le variabili (per comodità, ho copiato il mio file .env su .env.example, così potete prendere le variabili da lì ).
+5. Eseguire le migrazioni del database e popolarlo con dati fake: `php artisan migrate --seed`.
+6. Avviare il server: `php artisan serve`.
+7. Avviare il frontend: `npm run dev` o `npm run build`.
+
+## Conclusioni
+Questo progetto offre una solida base per lo sviluppo di un'applicazione di e-commerce scalabile e performante. La scelta di tecnologie moderne e la configurazione per il deploy su una piattaforma cloud contribuiranno a garantire una gestione efficiente e sicura dell'applicazione. La pipeline CI/CD automatizzata assicura una distribuzione continua e affidabile delle nuove funzionalità.
