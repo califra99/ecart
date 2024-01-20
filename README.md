@@ -3,24 +3,6 @@
 ## Introduzione
 Questo progetto è un'applicazione di e-commerce sviluppata utilizzando il framework Laravel, il framework CSS Tailwind, il framework JavaScript Vue.js e Inertia.js. La combinazione di queste tecnologie è stata scelta per garantire un'esperienza utente fluida, un backend robusto e una gestione efficiente dello stato dell'applicazione.
 
-## Criticità della struttura fornita
-Ci sono alcune criticità potenziali nella struttura fornita. Di seguito sono elencati alcuni punti che potrebbero causare problemi o possono essere migliorati:
-
-1. **Nomi delle tabelle in PascalCase invece di snake_case:**
-   La convenzione comune è utilizzare nomi di tabelle in snake_case. L'attuale utilizzo di PascalCase potrebbe causare confusione con le pratiche di denominazione comuni nei framework come Laravel.
-     
-2. **Uso di TEXT per il nome del prodotto:**
-   Utilizzare il tipo di dato `TEXT` per il campo `Name` del prodotto potrebbe essere eccessivo. Ho preferito usare `VARCHAR` con una lunghezza massima appropriata.
-
-3. **Campo `AssociatedProductIds` come TEXT:**
-  Il campo `AssociatedProductIds` nella tabella dei coupon è dichiarato come `TEXT`. Ho preferito normalizzare i dati utilizzando una tabella di collegamento (coupons_products).
-
-4. **Campo `Active` come bit(1):**
-   L'uso di `bit(1)` per rappresentare un campo booleano (`Active`) può portare a complessità nella gestione dei dati. Ho trovato più chiaro utilizzare `TINYINT(1)`.
-
-5. **Assenza di indici sugli attributi di ricerca:**
-  L'assenza di indici potrebbe influire sulle prestazioni delle query. In questo esempio, non effettuando quasi mai delle query di ricerca non ho inserito molti indici, però sarebbe vantaggioso aggiungerne sui campi coinvolti nelle query.
-
 ## Scelte delle tecnologie
 
 ### Laravel
